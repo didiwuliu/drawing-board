@@ -13,25 +13,25 @@ $(function() {
     ctx.closePath();
   };
 
-  var drawing = false;
+  var EventHandler = function() {
+    var drawing = false;
 
-  var mouseDown = function(e) {
-    drawing = true;
-    stroke(e);
-    return false;
-  };
-
-  var mouseMove = function(e) {
-    if(drawing) {
+    this.mousedown = function(e) {
+      drawing = true;
       stroke(e);
-    }
+      return false;
+    };
+
+    this.mousemove = function(e) {
+      if(drawing) {
+        stroke(e);
+      }
+    };
+
+    this.mouseup = function(e) {
+      drawing = false;
+    };
   };
 
-  var mouseUp = function(e) {
-    drawing = false;
-  };
-
-  $canvas.mousedown(mouseDown);
-  $canvas.mousemove(mouseMove);
-  $canvas.mouseup(mouseUp);
+  $canvas.bind(new EventHandler);
 });
