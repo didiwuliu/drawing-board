@@ -1,10 +1,13 @@
 $(function() {
-  var $canvas = $("canvas#drawing-area");
+  var drawingArea = $("#drawing-area");
+  var $canvas = drawingArea.find("canvas");
   var canvas = $canvas[0];
   var ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  var resizeCanvas = function() {
+    canvas.width = drawingArea.width();
+    canvas.height = drawingArea.height();
+  }
 
   var stroke = function(e) {
     ctx.beginPath();
@@ -33,5 +36,7 @@ $(function() {
     };
   };
 
+  resizeCanvas();
   $canvas.bind(new EventHandler);
+  $(window).resize(resizeCanvas);
 });
