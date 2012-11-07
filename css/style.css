@@ -5,6 +5,10 @@ html, body {
   background-color: #CCC;
 }
 
+canvas {
+  display: block;
+}
+
 #drawing-area {
   position: absolute;
   top: 0px;
