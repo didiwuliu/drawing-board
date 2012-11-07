@@ -21,7 +21,12 @@ html, body {
 }
 
 #controls .control-group {
+  float: left;
   height: 100%;
+}
+
+#controls .control-group#file-controls {
+  float: right;
 }
 
 #controls .button {

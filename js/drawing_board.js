@@ -2,11 +2,13 @@
   var DrawingBoard = function() {
     var canvas = new Canvas();
     var colorSelector = new ColorSelector(canvas);
+    var clearButton = new ClearButton(canvas);
 
     this.init = function() {
       canvas.init();
       canvas.resizeCanvas();
       colorSelector.init();
+      clearButton.init();
       $(window).resize(canvas.resizeCanvas);
     };
   };
@@ -68,6 +70,31 @@
         self.addClass("selected");
         canvas.setColor(self.css("background-color"));
       });
+    };
+  };
+
+  var ClearButton = function(drawingCanvas) {
+    var $clearCanvas = $("#clear-button canvas");
+    var clearCanvas = $clearCanvas[0];
+    var ctx = clearCanvas.getContext("2d");
+
+    var drawLine = function(x1,y1,x2,y2) {
+      ctx.beginPath();
+      ctx.moveTo(x1,y1);
+      ctx.lineTo(x2,y2);
+      ctx.stroke();
+    };
+
+    var render = function() {
+      ctx.strokeStyle = "#F00";
+      ctx.lineWidth = 2;
+      drawLine(0,0,60,60);
+      drawLine(0,60,60,0);
+    };
+
+    this.init = function() {
+      render();
+      $clearCanvas.click(drawingCanvas.resizeCanvas);
     };
   };
 
